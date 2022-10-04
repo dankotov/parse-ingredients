@@ -178,12 +178,12 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
         if (
             len(commaSplitted[0]) == 0 or not commaSplitted[0][-1].isnumeric()
         ) and not commaSplitted[1][0].isnumeric():
-            print("Doing split for " + ingredient)
+            # print("Doing split for " + ingredient)
             comment = comment + " " + ", ".join(commaSplitted[1:])
             comment = comment.strip(" ")
             ingredient = commaSplitted[0]
         else:
-            print("Skipping split for " + ingredient)
+            # print("Skipping split for " + ingredient)
 
     rest = ingredient
 
