@@ -116,6 +116,10 @@ mise_en_place_options = {
     "seasoned",
     "thinly",
     "thin",
+    "plain",
+    "popped",
+    "white",
+    "cold",
 }
 
 # numbers with a simple slash fraction (1 1/3, 2 4/5, etc.)
