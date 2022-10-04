@@ -184,6 +184,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
             ingredient = commaSplitted[0]
         else:
             # print("Skipping split for " + ingredient)
+            pass
 
     rest = ingredient
 
