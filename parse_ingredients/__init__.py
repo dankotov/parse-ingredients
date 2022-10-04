@@ -8,6 +8,7 @@ class Ingredient:
     name: str
     quantity: int
     unit: str
+    mise_en_place: str
     comment: str
     original_string: str
 
@@ -57,6 +58,9 @@ units = {
     ],  # e.g.: "2-3inch piece of ginger" or 2-3" piece of ginger
     "cm": ["cm"],  # see inch…
 }
+
+# a predefined list of ways to prepare certain ingredients
+mise_en_place_options = {"chopped", "minced", "grated", "crushed"}
 
 # numbers with a simple slash fraction (1 1/3, 2 4/5, etc.)
 numberAndSlashFraction = re.compile(r"(\d{1,3}?\s\d\/\d{1,3})")
@@ -152,6 +156,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     unit = ""
     name = ""
     comment = ""
+    mise_en_place = ""
 
     # Recipe websites tend to put a comment between parantheses.
     # for example: 1 (fresh) egg. Let's see if we can find any and extract it
@@ -232,7 +237,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # that there is no unit string available, but we're dealing with,
     # for example: 1 egg, where egg is both the ingredient and unit.
     if len(splitted) == 1:
-        return Ingredient(rest, quantity, "", comment, ingredient)
+        return Ingredient(rest, quantity, "", mise_en_place, comment, ingredient)
 
     # let's see if we can find something in the string that matches any
     # of my defined units. The list isn't finished and will probably miss
@@ -246,6 +251,15 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
         if wouldBeUnit in value:
             unit = key
 
+    # some websites provide directions on how to mise en place a certain ingredient
+    # using the predefined list of ways to mise en place, we will try to extract them separately
+    mise_en_place_list = []
+    for word in splitted:
+        if word in mise_en_place_options:
+            splitted.remove(word)
+            mise_en_place_list.append(word)
+    mise_en_place = " ".join(mise_en_place_list)
+
     # If we did have a unit, join the rest of the string
     # if we didn't, join the entire string
     if unit != "":
@@ -256,4 +270,6 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # and voila! The most basic ingredient parser ever.
     # as I said, I'm not too happy with it and NLP would probably
     # be a better fit, but this brings more complexity
-    return Ingredient(name.strip(" "), quantity, unit, comment, raw_ingredient)
+    return Ingredient(
+        name.strip(" "), quantity, unit, mise_en_place, comment, raw_ingredient
+    )
