@@ -336,12 +336,11 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # some websites provide directions on how to mise en place a certain ingredient
     # using the predefined list of ways to mise en place, we will try to extract them separately
     ol_s = splitted
-    print("h")
     s = " ".join(splitted)
     if "choppped" in s:
         s_in_s = True
-    mise_en_place_list = []
     s_in_r = False
+    mise_en_place_list = []
     for word in splitted:
         if word.strip() in mise_en_place_options:
             if word.strip() == "chopped":
@@ -349,8 +348,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
             splitted.remove(word)
             mise_en_place_list.append(word)
     mise_en_place = " ".join(mise_en_place_list)
-    if s_in_s and not s_in_r:
-        print(ol_s, s_in_s, s_in_r)
+    print(ol_s, s_in_s, s_in_r)
     name = " ".join(splitted)
     print("he")
     # there is definitely a better way to do this
