@@ -318,11 +318,12 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # "1 fresh egg" gives us a unit "fresh". Here the unit will be undefined
     # and 'fresh egg' will be the ingredient. This should probably later be
     # filtered again.
-    wouldBeUnit = splitted[0]
-    for key in units:
-        value = units[key]
-        if wouldBeUnit in value:
-            unit = key
+    for potentialUnit in splitted:
+        for key in units:
+            value = units[key]
+            if potentialUnit in value:
+                splitted.remove(potentialUnit)
+                unit = key
 
     # some websites provide directions on how to mise en place a certain ingredient
     # using the predefined list of ways to mise en place, we will try to extract them separately
