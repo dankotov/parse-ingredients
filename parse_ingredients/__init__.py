@@ -343,7 +343,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     mise_en_place_list = []
     for word in splitted:
         if word.strip() in mise_en_place_options:
-            if word.strip() == "chopped":
+            if "chopped" in word:
                 s_in_r = True
             splitted.remove(word)
             mise_en_place_list.append(word)
