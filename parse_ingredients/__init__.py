@@ -326,7 +326,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # "1 fresh egg" gives us a unit "fresh". Here the unit will be undefined
     # and 'fresh egg' will be the ingredient. This should probably later be
     # filtered again.
-    for potentialUnit in splitted:
+    for potentialUnit in list(splitted):
         for key in units:
             value = units[key]
             if potentialUnit in value:
@@ -335,22 +335,13 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
 
     # some websites provide directions on how to mise en place a certain ingredient
     # using the predefined list of ways to mise en place, we will try to extract them separately
-    # ol_s = splitted
-    # s = " ".join(splitted)
-    # if "choppped" in s:
-    #     s_in_s = True
-    # s_in_r = False
     mise_en_place_list = []
-    for word in splitted:
-        if word.strip() in mise_en_place_options:
-            # if "chopped" in word:
-            #     s_in_r = True
+    for word in list(splitted):
+        if word in mise_en_place_options:
             splitted.remove(word)
             mise_en_place_list.append(word)
     mise_en_place = " ".join(mise_en_place_list)
-    # print(ol_s, s_in_s, s_in_r)
     name = " ".join(splitted)
-    print("he")
     # there is definitely a better way to do this
     name = name[4:] if name.startswith("and ") else name
     name = name[:-4] if name.endswith(" and") else name
