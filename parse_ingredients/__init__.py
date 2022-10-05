@@ -60,6 +60,7 @@ units = {
     "handful": ["handful", "handfuls"],
     "piece": ["piece", "pieces", "pc", "pc."],
     "slice": ["slice", "slices"],
+    "wedge": ["wedge", "wedges"],
     "square": ["square", "squares"],
     "drop": ["drop", "drops"],
     "rack": ["rack", "racks"],
