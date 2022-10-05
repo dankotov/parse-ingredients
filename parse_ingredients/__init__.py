@@ -310,7 +310,9 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # that there is no unit string available, but we're dealing with,
     # for example: 1 egg, where egg is both the ingredient and unit.
     if len(splitted) == 1:
-        return Ingredient(rest, quantity, "", mise_en_place, comment, ingredient)
+        name = rest[4:] if rest.startswith("and ") else rest
+        name = rest[:-4] if rest.endswith(" and") else rest
+        return Ingredient(name, quantity, "", mise_en_place, comment, ingredient)
 
     # let's see if we can find something in the string that matches any
     # of my defined units. The list isn't finished and will probably miss
@@ -334,12 +336,10 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
             mise_en_place_list.append(word)
     mise_en_place = " ".join(mise_en_place_list)
 
-    # If we did have a unit, join the rest of the string
-    # if we didn't, join the entire string
-    if unit != "":
-        name = " ".join(splitted[1:])
-    else:
-        name = " ".join(splitted)
+    name = " ".join(splitted)
+    # there is definitely a better way to do this
+    name = name[4:] if name.startswith("and ") else name
+    name = name[:-4] if name.endswith(" and") else name
 
     # and voila! The most basic ingredient parser ever.
     # as I said, I'm not too happy with it and NLP would probably
