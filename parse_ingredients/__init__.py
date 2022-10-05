@@ -236,19 +236,24 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
             ingredient = ingredient[1:]
 
     # Some recipe websites tend to put a comment in the end of the line
-    # seperated by a comma. Let's see if we can find any and extract it
+    # seperated by a comma or a semicolon. Let's see if we can find any and extract it
     # We do this here, pretty early, because there might be numbers in there
     # we don't want to take in account for quantities.
-    commaSplitted = ingredient.split(",")
-    if len(commaSplitted) > 1:
+
+    commentDelimiter = ","
+    if ";" in ingredient:
+        commentDelimiter = ";"
+    punctuationSplitted = ingredient.split(commentDelimiter)
+    if len(punctuationSplitted) > 1:
         # But we also want to allow decimals in the form of 0,5
         if (
-            len(commaSplitted[0]) == 0 or not commaSplitted[0][-1].isnumeric()
-        ) and not commaSplitted[1][0].isnumeric():
+            len(punctuationSplitted[0]) == 0
+            or not punctuationSplitted[0][-1].isnumeric()
+        ) and not punctuationSplitted[1][0].isnumeric():
             # print("Doing split for " + ingredient)
-            comment = comment + " " + ", ".join(commaSplitted[1:])
+            comment = comment + " " + ", ".join(punctuationSplitted[1:])
             comment = comment.strip(" ")
-            ingredient = commaSplitted[0]
+            ingredient = punctuationSplitted[0]
         else:
             # print("Skipping split for " + ingredient)
             pass
