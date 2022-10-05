@@ -129,6 +129,7 @@ mise_en_place_options = {
     "rinsed",
     "stemmed",
     "very",
+    "snipped",
 }
 
 # numbers with a simple slash fraction (1 1/3, 2 4/5, etc.)
