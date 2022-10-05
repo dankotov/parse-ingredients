@@ -45,6 +45,7 @@ units = {
     "gal": ["gal", "gallon", "gallons"],
     "dash": ["dash"],
     "can": ["can", "cans"],
+    "container": ["container", "containers"],
     "jar": ["jar"],
     "bottle": ["bottle", "bottles"],
     "jigger": ["jigger", "jiggers"],
