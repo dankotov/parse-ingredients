@@ -336,6 +336,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     # some websites provide directions on how to mise en place a certain ingredient
     # using the predefined list of ways to mise en place, we will try to extract them separately
     ol_s = splitted
+    print("h")
     s = " ".join(splitted)
     if "choppped" in s:
         s_in_s = True
@@ -351,6 +352,7 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
     if s_in_s and not s_in_r:
         print(ol_s, s_in_s, s_in_r)
     name = " ".join(splitted)
+    print("he")
     # there is definitely a better way to do this
     name = name[4:] if name.startswith("and ") else name
     name = name[:-4] if name.endswith(" and") else name
