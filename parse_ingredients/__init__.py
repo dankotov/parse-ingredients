@@ -1,3 +1,4 @@
+from operator import indexOf
 import unicodedata
 import re
 from dataclasses import dataclass
@@ -74,7 +75,6 @@ units = {
 
 # a predefined list of ways to prepare certain ingredients
 mise_en_place_options = {
-    "chopped",
     "minced",
     "grated",
     "crushed",
@@ -130,6 +130,8 @@ mise_en_place_options = {
     "stemmed",
     "very",
     "snipped",
+    "shelled",
+    "chopped",
 }
 
 # numbers with a simple slash fraction (1 1/3, 2 4/5, etc.)
@@ -332,6 +334,9 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
 
     # some websites provide directions on how to mise en place a certain ingredient
     # using the predefined list of ways to mise en place, we will try to extract them separately
+    s = " ".join(splitted)
+    if "chopped" in s:
+        print(s)
     mise_en_place_list = []
     for word in splitted:
         if word in mise_en_place_options:
