@@ -132,6 +132,7 @@ mise_en_place_options = {
     "snipped",
     "shelled",
     "chopped",
+    "coarsely",
 }
 
 # numbers with a simple slash fraction (1 1/3, 2 4/5, etc.)
@@ -334,12 +335,9 @@ def parse_ingredient(raw_ingredient: str) -> Ingredient:
 
     # some websites provide directions on how to mise en place a certain ingredient
     # using the predefined list of ways to mise en place, we will try to extract them separately
-    s = " ".join(splitted)
-    if "chopped" in s:
-        print(s)
     mise_en_place_list = []
     for word in splitted:
-        if word in mise_en_place_options:
+        if word.strip() in mise_en_place_options:
             splitted.remove(word)
             mise_en_place_list.append(word)
     mise_en_place = " ".join(mise_en_place_list)
