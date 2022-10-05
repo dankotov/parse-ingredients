@@ -120,6 +120,12 @@ mise_en_place_options = {
     "popped",
     "white",
     "cold",
+    "gutted",
+    "trimmed",
+    "thawed",
+    "washed",
+    "rinsed",
+    "stemmed",
 }
 
 # numbers with a simple slash fraction (1 1/3, 2 4/5, etc.)
