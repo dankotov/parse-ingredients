@@ -70,8 +70,10 @@ units = {
         "inch",
         "inches",
         '"',
+        "-inch",
     ],  # e.g.: "2-3inch piece of ginger" or 2-3" piece of ginger
     "cm": ["cm"],  # see inch…
+    "other": ["/4", "00", "80%", "85%", "9", "99%-"],
 }
 
 # a predefined list of ways to prepare certain ingredients
